@@ -14,18 +14,6 @@
 
 Ex'eat is a food delivery company.
 
-## All MS
-
-- exeat.authService: 8080
-- exeat.clientService: 8081
-- exeat.restaurantService: 8082
-- exeat.deliverService: 8083
-- exeat.orderService: 8084
-- exeat.paymentService: 8085
-- exeat.statsService: 8086
-- exeat.patronageService: 8087
-
-
 
 ## Installation
 
