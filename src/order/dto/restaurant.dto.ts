@@ -1,8 +1,6 @@
-import { Article } from '../article/article.schema';
-import { Menu } from '../menu/menu.dto';
-import { ILocationDto } from '../dto/deliver.dto';
+import { ILocationDto } from './deliver.dto';
 
-export interface Restaurant {
+export interface IRestaurantDto {
 	_id: string;
 	globalUserId: number;
 	name: string;
@@ -13,8 +11,6 @@ export interface Restaurant {
 	termsOfUse: boolean;
 	location: ILocationDto;
 	patronageCode: string;
-	notifiction: boolean;
+	notification: boolean;
 	restaurantImage: string;
-	menus: Menu[];
-	articles: Article[];
 }

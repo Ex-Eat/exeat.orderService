@@ -1,20 +1,34 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { OrderStatusEnum } from './_enums/order-status.enum';
+import { Article } from './schemas/article.schema';
+import { Client } from './schemas/client.schema';
+import mongoose from 'mongoose';
+import { Menu } from './schemas/menu.schema';
+import { Deliver } from './schemas/deliver.schema';
+import { Restaurant } from './schemas/restaurant.schema';
 
-@Schema()
+@Schema({ timestamps: true })
 export class Order {
-
 	_id: MongooseSchema.Types.ObjectId;
 
-	restaurant: Restaurant,
-	client: Client,
-	deliver: Deliver,
-	status: Enum["à définir"],
+	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' })
+	restaurant: Restaurant;
 
-	@Prop()
-	createdAt: Date,
+	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Client' })
+	client: Client;
 
-	products: [Article, Menu, ...],
+	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Deliverer' })
+	deliver: Deliver;
+
+	@Prop({ type: String })
+	status: OrderStatusEnum;
+
+	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Article' })
+	articles: Article[];
+
+	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Menu' })
+	menus: Menu[];
 
 	@Prop({
 		type: {
@@ -38,6 +52,15 @@ export class Order {
 
 	@Prop()
 	restaurantComment: string;
+
+	@Prop()
+	restaurantPrice: number;
+
+	@Prop()
+	deliverer: number;
+
+	@Prop()
+	appFee: number;
 }
 
 export type OrderDocument = Order & Document;

@@ -1,41 +1,13 @@
-import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { ILocationDto } from './deliver.dto';
 
-export class Client {
-	@Prop()
-	_id: MongooseSchema.Types.ObjectId;
-
-	@Prop()
+export interface IClientDto {
+	_id: string;
 	globalUserId: number;
-
-	@Prop()
 	firstName: string;
-
-	@Prop()
 	lastName: string;
-
-	@Prop()
 	phoneNumber: string;
-
-	@Prop()
 	termsOfUse: boolean;
-
-	@Prop({
-		type: {
-			lat: Number,
-			lng: Number,
-			address: String,
-		},
-	})
-	locations: { lat: number; lng: number; address: string };
-
-	@Prop()
+	locations: ILocationDto;
 	patronageCode: string;
-
-	@Prop()
 	notification: boolean;
 }
-
-export type ClientDocument = Client & Document;
-
-export const ClientSchema = SchemaFactory.createForClass(Client);
