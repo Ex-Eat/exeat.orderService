@@ -13,7 +13,7 @@ export class OrderController {
 		return this._service.findAll(search);
 	}
 
-	@MessagePattern({ cmd: 'order' })
+	@MessagePattern({ cmd: 'order/one' })
 	async order(id: string): Promise<Order> {
 		return this._service.findOne(id);
 	}
