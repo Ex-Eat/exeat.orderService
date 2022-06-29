@@ -18,8 +18,8 @@ export class Order {
 	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Client' })
 	client: Client;
 
-	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Deliverer' })
-	deliver: Deliver;
+	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Deliverer', nullable: true })
+	deliver?: Deliver;
 
 	@Prop({ type: String })
 	status: OrderStatusEnum;
@@ -44,14 +44,14 @@ export class Order {
 		address: string;
 	};
 
-	@Prop()
-	clientComment: string;
+	@Prop({ required: false })
+	clientComment?: string;
 
-	@Prop()
-	deliverComment: string;
+	@Prop({ required: false })
+	deliverComment?: string;
 
-	@Prop()
-	restaurantComment: string;
+	@Prop({ required: false })
+	restaurantComment?: string;
 
 	@Prop()
 	restaurantPrice: number;

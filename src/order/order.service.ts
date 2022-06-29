@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
+import {InjectModel, Prop} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
 import {Order, OrderDocument} from './order.schema';
 import {IOrderSearchDto} from './dto/order-search.dto';
@@ -29,9 +29,19 @@ export class OrderService {
 			});
 	}
 
-	async create(input: ICreateOrderDto): Promise<Order> {
-		const createdOrder: OrderDocument = new this._model(input);
-		createdOrder.status = OrderStatusEnum.CREATED;
+	async create(input: ICreateOrderDto, client): Promise<Order> {
+		const newOrder: Partial<Order> = {
+			...input,
+			menus: input.menus.map(m => m._id),
+			articles: input.articles.map(a => a._id),
+			status: OrderStatusEnum.CREATED,
+			delivererFee: input.restaurantPrice / 10,
+			appFee: input.restaurantPrice / 10,
+			client: client._id,
+			deliverComment: '',
+			restaurantComment: ''
+		}
+		const createdOrder: OrderDocument = new this._model(newOrder);
 		return createdOrder.save();
 	}
 

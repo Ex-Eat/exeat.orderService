@@ -3,6 +3,7 @@ import { OrderService } from './order.service';
 import { MessagePattern } from '@nestjs/microservices';
 import { Order } from './order.schema';
 import { IOrderSearchDto } from './dto/order-search.dto';
+import {ICreateOrderDto} from "./order.dto";
 
 @Controller('order')
 export class OrderController {
@@ -19,8 +20,8 @@ export class OrderController {
 	}
 
 	@MessagePattern({ cmd: 'order/create' })
-	async create(data) {
-		return this._service.create(data);
+	async create(data: { cart: ICreateOrderDto, client: unknown }) {
+		return await this._service.create(data.cart, data.client);
 	}
 
 	@MessagePattern({ cmd: 'order/update' })

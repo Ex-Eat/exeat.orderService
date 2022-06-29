@@ -22,8 +22,6 @@ export interface IOrderDto {
 	deliverComment: string;
 	restaurantComment: string;
 	restaurantPrice: number;
-	delivererFee: number;
-	appFee: number;
 }
 
 export interface ICreateOrderDto {
@@ -32,6 +30,7 @@ export interface ICreateOrderDto {
 	client: IClientDto;
 	articles: IArticleDto[];
 	menus: IMenuDto[];
+	status: OrderStatusEnum;
 	location: {
 		lat: number;
 		lng: number;
