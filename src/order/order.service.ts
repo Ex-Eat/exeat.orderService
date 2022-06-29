@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Order, OrderDocument } from './order.schema';
-import { IOrderSearchDto } from './dto/order-search.dto';
+import {Injectable} from '@nestjs/common';
+import {InjectModel} from '@nestjs/mongoose';
+import {Model} from 'mongoose';
+import {Order, OrderDocument} from './order.schema';
+import {IOrderSearchDto} from './dto/order-search.dto';
 import {ICreateOrderDto, IUpdateOrderDto} from "./order.dto";
+import {OrderStatusEnum} from "./_enums/order-status.enum";
 
 @Injectable()
 export class OrderService {
@@ -29,7 +30,8 @@ export class OrderService {
 	}
 
 	async create(input: ICreateOrderDto): Promise<Order> {
-		const createdOrder = new this._model(input);
+		const createdOrder: Order = new this._model(input);
+		createdOrder.status = OrderStatusEnum.CREATED;
 		return createdOrder.save();
 	}
 
