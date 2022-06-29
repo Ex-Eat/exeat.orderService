@@ -15,7 +15,17 @@ export class OrderService {
 	}
 
 	async findOne(_id: string): Promise<Order> {
-		return this._model.findOne({ _id });
+		return this._model.findOne({ _id })
+			.populate('restaurant')
+			.populate('deliverer')
+			.populate('articles')
+			.populate({
+				path: 'menus',
+				populate: {
+					path: 'articles',
+					model: 'Article'
+				}
+			});
 	}
 
 	async create(input: ICreateOrderDto): Promise<Order> {
