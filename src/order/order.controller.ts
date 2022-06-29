@@ -22,4 +22,9 @@ export class OrderController {
 	async create(data) {
 		return this._service.create(data);
 	}
+
+	@MessagePattern({ cmd: 'order/update' })
+	async update(data) {
+		return this._service.update(data);
+	}
 }
