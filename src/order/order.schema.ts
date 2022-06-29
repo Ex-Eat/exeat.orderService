@@ -57,7 +57,7 @@ export class Order {
 	restaurantPrice: number;
 
 	@Prop()
-	deliverer: number;
+	delivererFee: number;
 
 	@Prop()
 	appFee: number;
