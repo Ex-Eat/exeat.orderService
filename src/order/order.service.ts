@@ -30,7 +30,7 @@ export class OrderService {
 	}
 
 	async create(input: ICreateOrderDto): Promise<Order> {
-		const createdOrder: Order = new this._model(input);
+		const createdOrder: OrderDocument = new this._model(input);
 		createdOrder.status = OrderStatusEnum.CREATED;
 		return createdOrder.save();
 	}
