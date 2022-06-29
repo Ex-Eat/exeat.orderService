@@ -32,8 +32,8 @@ export class OrderService {
 	async create(input: ICreateOrderDto, client): Promise<Order> {
 		const newOrder: Partial<Order> = {
 			...input,
-			menus: input.menus.map(m => m._id),
-			articles: input.articles.map(a => a._id),
+			menus: input.menus.map(m => m._id) || [null],
+			articles: input.articles.map(a => a._id) || [null],
 			status: OrderStatusEnum.CREATED,
 			delivererFee: input.restaurantPrice / 10,
 			appFee: input.restaurantPrice / 10,
