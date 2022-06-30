@@ -28,8 +28,8 @@ export interface ICreateOrderDto {
 	_id: string;
 	restaurant: IRestaurantDto;
 	client: IClientDto;
-	articles: IArticleDto[];
-	menus: IMenuDto[];
+	articles: IArticleDto[] | string[];
+	menus: IMenuDto[] | string[];
 	status: OrderStatusEnum;
 	location: {
 		lat: number;
@@ -37,6 +37,8 @@ export interface ICreateOrderDto {
 		address: string;
 	};
 	clientComment: string;
+	deliverComment?: string;
+	restaurantComment?: string;
 	restaurantPrice: number;
 	delivererFee: number;
 	appFee: number;

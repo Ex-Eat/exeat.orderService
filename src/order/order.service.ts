@@ -12,7 +12,13 @@ export class OrderService {
 	}
 
 	async findAll(search?: IOrderSearchDto): Promise<Order[]> {
-		return this._model.find({ search });
+		return this._model.find({
+			_id: search?._id || null,
+			client: search?.client || null,
+			restaurant: search?.restaurant || null,
+			deliver: search?.deliver || null,
+			status: search?.status || null,
+		});
 	}
 
 	async findOne(_id: string): Promise<Order> {
@@ -30,7 +36,7 @@ export class OrderService {
 	}
 
 	async create(input: ICreateOrderDto, client): Promise<Order> {
-		const newOrder: Partial<Order> = {
+		const newOrder: ICreateOrderDto = {
 			...input,
 			menus: input.menus.map(m => m._id) || [null],
 			articles: input.articles.map(a => a._id) || [null],
